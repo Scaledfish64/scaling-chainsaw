@@ -3,7 +3,7 @@ const questions = [
   "Approximately how tall was the concrete portion of the Berlin Wall?",
   "What was the dangerous area between the wall's barriers called?",
   'How do you say "wall" in German?',
-  "What material was used to reinforce the Berlin Wall?",
+  "What material was used to make the Berlin Wall?",
   "In what year was the Berlin Wall constructed?",
   "Which government constructed the Berlin Wall?",
   "On what date did construction of the Berlin Wall begin?",
