@@ -3,78 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="A colorful 25-question trivia game with a brick-style board."
-    />
-    <title>Brick by Brick Trivia</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="description" content="A simple 25-question trivia game." />
+    <title>Trivia</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
     <main class="app-shell">
-      <header class="hero">
-        <div>
-          <p class="eyebrow">Quick-fire knowledge challenge</p>
-          <h1>Brick by Brick <span>Trivia</span></h1>
-          <p class="intro">
-            Pick a brick to reveal a question. Once you return to the board,
-            that brick is cleared for good.
-          </p>
-        </div>
-        <div class="score-card" aria-label="Game progress">
-          <span class="score-label">BRICKS CLEARED</span>
-          <strong><span id="cleared-count">0</span><small>/25</small></strong>
-          <div class="progress-track" aria-hidden="true">
-            <div class="progress-bar" id="progress-bar"></div>
-          </div>
-        </div>
-      </header>
-
       <section id="board-view" class="view active" aria-labelledby="board-title">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Choose your next challenge</p>
-            <h2 id="board-title">The trivia wall</h2>
-          </div>
-          <p class="board-hint">25 questions · 5 categories</p>
-        </div>
+        <h1 id="board-title">Trivia</h1>
         <div id="board" class="board" aria-label="Trivia question board"></div>
       </section>
 
       <section id="question-view" class="view question-view" aria-labelledby="question-title" hidden>
-        <button id="back-button" class="back-button" type="button">
-          <span aria-hidden="true">←</span> Return to board
-        </button>
+        <button id="back-button" class="back-button" type="button" aria-label="Return to board">←</button>
         <div class="question-card">
-          <div class="question-meta">
-            <span id="question-category" class="category-pill">CATEGORY</span>
-            <span id="question-number" class="question-number">QUESTION 01</span>
-          </div>
-          <div class="question-content">
-            <p class="eyebrow">Your question</p>
-            <h2 id="question-title">Question goes here</h2>
-            <p class="question-note">
-              Take your best shot, then return to the board to lock in your turn.
-            </p>
-          </div>
-          <div class="answer-line" aria-hidden="true"></div>
-          <p class="return-tip">The brick disappears when you return.</p>
-        </div>
-      </section>
-
-      <section id="complete-view" class="view complete-view" aria-labelledby="complete-title" hidden>
-        <div class="complete-card">
-          <div class="trophy" aria-hidden="true">✦</div>
-          <p class="eyebrow">Wall complete</p>
-          <h2 id="complete-title">You cleared every brick!</h2>
-          <p>Twenty-five questions down. That is a seriously solid trivia streak.</p>
-          <button id="reset-button" class="primary-button" type="button">Build the wall again</button>
+          <h2 id="question-title">Question goes here</h2>
         </div>
       </section>
     </main>
