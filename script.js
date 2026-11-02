@@ -29,14 +29,8 @@ const questions = [
 const board = document.querySelector("#board");
 const boardView = document.querySelector("#board-view");
 const questionView = document.querySelector("#question-view");
-const completeView = document.querySelector("#complete-view");
-const questionCategory = document.querySelector("#question-category");
-const questionNumber = document.querySelector("#question-number");
 const questionTitle = document.querySelector("#question-title");
 const backButton = document.querySelector("#back-button");
-const resetButton = document.querySelector("#reset-button");
-const clearedCount = document.querySelector("#cleared-count");
-const progressBar = document.querySelector("#progress-bar");
 
 let activeQuestion = null;
 let clearedQuestions = new Set();
@@ -44,36 +38,36 @@ let clearedQuestions = new Set();
 function renderBoard() {
   board.replaceChildren();
 
-  questions.forEach((item, index) => {
-    if (clearedQuestions.has(index)) {
-      return;
+  for (let rowIndex = 0; rowIndex < 5; rowIndex += 1) {
+    const row = document.createElement("div");
+    row.className = "brick-row";
+
+    for (let columnIndex = 0; columnIndex < 5; columnIndex += 1) {
+      const index = rowIndex * 5 + columnIndex;
+      const brick = document.createElement("button");
+      brick.type = "button";
+      brick.className = clearedQuestions.has(index) ? "empty-brick" : "brick";
+      brick.setAttribute("aria-label", `Question ${index + 1}`);
+
+      if (!clearedQuestions.has(index)) {
+        brick.addEventListener("click", () => showQuestion(index));
+      } else {
+        brick.disabled = true;
+      }
+
+      row.append(brick);
     }
 
-    const brick = document.createElement("button");
-    brick.type = "button";
-    brick.className = "brick";
-    brick.innerHTML = `
-      <span class="brick-number">BRICK ${String(index + 1).padStart(2, "0")}</span>
-      <span class="brick-category">${item.category}</span>
-    `;
-    brick.addEventListener("click", () => showQuestion(index));
-    board.append(brick);
-  });
-
-  const cleared = clearedQuestions.size;
-  clearedCount.textContent = cleared;
-  progressBar.style.width = `${(cleared / questions.length) * 100}%`;
+    board.append(row);
+  }
 }
 
 function showQuestion(index) {
   activeQuestion = index;
   const item = questions[index];
-  questionCategory.textContent = item.category.toUpperCase();
-  questionNumber.textContent = `QUESTION ${String(index + 1).padStart(2, "0")}`;
   questionTitle.textContent = item.question;
   boardView.hidden = true;
   questionView.hidden = false;
-  completeView.hidden = true;
   backButton.focus();
 }
 
@@ -85,22 +79,8 @@ function returnToBoard() {
 
   renderBoard();
   questionView.hidden = true;
-  completeView.hidden = clearedQuestions.size !== questions.length;
-  boardView.hidden = !completeView.hidden;
-
-  if (!completeView.hidden) {
-    resetButton.focus();
-  }
-}
-
-function resetGame() {
-  clearedQuestions = new Set();
-  renderBoard();
-  completeView.hidden = true;
   boardView.hidden = false;
-  document.querySelector(".brick")?.focus();
 }
 
 backButton.addEventListener("click", returnToBoard);
-resetButton.addEventListener("click", resetGame);
 renderBoard();
